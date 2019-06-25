@@ -5,16 +5,16 @@ from selenium import webdriver
 
 answer = math.log(int(time.time()))
 
-links_array = [
-    "https://stepik.org/lesson/236895/step/1",
-    "https://stepik.org/lesson/236896/step/1",
-    "https://stepik.org/lesson/236897/step/1",
-    "https://stepik.org/lesson/236898/step/1",
-    "https://stepik.org/lesson/236899/step/1",
-    "https://stepik.org/lesson/236903/step/1",
-    "https://stepik.org/lesson/236904/step/1",
-    "https://stepik.org/lesson/236905/step/1"
-]
+# links_array = {
+#     "236895",
+#     # "https://stepik.org/lesson/236896/step/1",
+#     # "https://stepik.org/lesson/236897/step/1",
+#     # "https://stepik.org/lesson/236898/step/1",
+#     # "https://stepik.org/lesson/236899/step/1",
+#     # "https://stepik.org/lesson/236903/step/1",
+#     # "https://stepik.org/lesson/236904/step/1",
+#     # "https://stepik.org/lesson/236905/step/1"
+# }
 
 
 @pytest.fixture(scope="function")
@@ -26,10 +26,10 @@ def browser():
     browser.quit()
 
 
-@pytest.mark.parametrize('link', links_array)
+@pytest.mark.parametrize('link', ["236895", "236896", "236897", "236898", "236899", "236903", "236904", "236905"])
 class TestOpenPage(object):
     def test_open_page(self, browser, link):
-        link = "{}".format(links_array)
+        link = "https://stepik.org/lesson/{}/step/1".format(link)
         browser.get(link)
         browser.find_element_by_class_name('text_area').send_keys(answer)
 
