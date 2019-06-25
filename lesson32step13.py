@@ -54,7 +54,7 @@ class TestAbs(unittest.TestCase):
 
         welcome_text = welcome_text_elt.text
 
-        self.assertEqual(welcome_text, "Поздравляем! Вы успешно зарегистировались!", "Should have successfull message")
+        assert welcome_text == "Поздравляем! Вы успешно зарегистировались!", "Should have successfull message"
 
 
 if __name__ == "__main__":
