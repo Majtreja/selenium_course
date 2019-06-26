@@ -3,7 +3,7 @@ import math
 import pytest
 from selenium import webdriver
 
-answer = math.log(int(time.time()))
+
 
 # links_array = {
 #     "236895",
@@ -21,6 +21,7 @@ answer = math.log(int(time.time()))
 def browser():
     print("\nstart browser for test..")
     browser = webdriver.Chrome()
+    browser.implicitly_wait(5)
     yield browser
     print("\nquit browser..")
     browser.quit()
@@ -31,5 +32,8 @@ class TestOpenPage(object):
     def test_open_page(self, browser, link):
         link = "https://stepik.org/lesson/{}/step/1".format(link)
         browser.get(link)
-        browser.find_element_by_class_name('text_area').send_keys(answer)
-
+        answer = math.log(int(time.time()))
+        browser.find_element_by_tag_name('textarea').send_keys(str(answer))
+        browser.find_element_by_class_name('submit-submission ').click()
+        result = browser.find_element_by_class_name('smart-hints__hint').text
+        assert result == "Correct!"
